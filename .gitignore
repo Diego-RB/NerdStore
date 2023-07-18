@@ -1,2 +1,4 @@
 ﻿.vs
 src/NerdStore.Cadastro.Domain/obj
+src/NerdStore.Core/obj
+src/NerdStore.Catalogo.Domain/obj
