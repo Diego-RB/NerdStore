@@ -1,0 +1,10 @@
+/.packages
+/.vs
+/.vscode
+**/bin
+**/obj
+**/DesignTimeBuild
+NerdStore.Cadastro.Domain/obj
+NerdStore.Cadastro.Domain/bin
+NerdStore.Core/bin
+NerdStore.Core/obj
