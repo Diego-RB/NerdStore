@@ -4,7 +4,7 @@
 **/bin
 **/obj
 **/DesignTimeBuild
-src/NerdStore.Cadastro.Domain/obj
-src/NerdStore.Cadastro.Domain/bin
-src/srcNerdStore.Core/bin
-src/NerdStore.Core/obj
+/src/NerdStore.Cadastro.Domain/obj
+/src/NerdStore.Cadastro.Domain/bin
+/src/srcNerdStore.Core/bin
+/src/NerdStore.Core/obj
