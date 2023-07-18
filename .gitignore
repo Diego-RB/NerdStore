@@ -1,4 +1,10 @@
-﻿.vs
-src/NerdStore.Cadastro.Domain/obj
-src/NerdStore.Core/obj
-src/NerdStore.Catalogo.Domain/obj
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/src/NerdStore.Cadastro.Domain/obj/Release/net6.0
+/src/NerdStore.Cadastro.Domain/obj/Debug/net6.0/NerdStore.Cadastro.Domain.csproj.AssemblyReference.cache
+/src/NerdStore.Catalogo.Domain/obj/Release/net6.0
+/src/NerdStore.Core/obj/Release/net6.0
+.vs/NerdStore/DesignTimeBuild
