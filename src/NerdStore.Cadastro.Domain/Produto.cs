@@ -23,6 +23,8 @@ namespace NerdStore.Cadastro.Domain
             DataCadastro = dataCadastro;
             Imagem = imagem;
             CategoriaId = categoriaId;
+
+            Validar();
         }
 
         public void Ativar() => Ativo = true;
@@ -36,11 +38,17 @@ namespace NerdStore.Cadastro.Domain
 
         public void AlterarDescricao(string descricao)
         {
+            Validacoes.ValidarSeNuloOuVazio(descricao, "O campo Descrição não pode estar vazio");
             Descricao = descricao;
         }
 
         public void DebitarEstoque(int quantidade)
         {
+            Validacoes.ValidarSeNuloOuVazio(Nome, "O campo Nome da categoria não pode estar vazio");
+
+            if (PossuiEstoque(quantidade))
+                throw new DomainException("Estoque insuf");
+
             if (quantidade < 0) quantidade *= -1;
             QuantidadeEstoque -= quantidade;
         }

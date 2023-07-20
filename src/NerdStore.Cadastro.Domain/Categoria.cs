@@ -11,11 +11,19 @@ namespace NerdStore.Cadastro.Domain
         {
             Nome = nome;
             Codigo = codigo;
+
+            Validar();
         }
 
         public override string ToString()
         {
             return $"{Nome} - {Codigo}";
+        }
+
+        public void Validar()
+        {
+            Validacoes.ValidarSeNuloOuVazio(Nome, "O campo Nome da categoria não pode estar vazio");
+            Validacoes.ValidarSeIgual(Codigo, 0, "O campo Codigo não pode ser 0");
         }
     }
 }
