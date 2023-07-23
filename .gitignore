@@ -9,3 +9,5 @@
 /src/NerdStore.Cadastro.Domain/bin
 /src/NerdStore.Catalogo.Domain/bin
 /src/NerdStore.Core/bin
+tests/NerdStore.Catalogo.Domain.Tests/bin
+tests/NerdStore.Catalogo.Domain.Tests/obj
