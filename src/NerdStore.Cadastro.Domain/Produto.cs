@@ -1,9 +1,10 @@
 ﻿using NerdStore.Core.DomainObjects;
 
-namespace NerdStore.Cadastro.Domain
+namespace NerdStore.Catalogo.Domain
 {
     public class Produto : Entity, IAggregateRoot
     {
+        public Guid CategoriaId { get; private set; }
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public bool Ativo { get; private set; }
@@ -11,23 +12,26 @@ namespace NerdStore.Cadastro.Domain
         public DateTime DataCadastro { get; private set; }
         public string Imagem { get; private set; }
         public int QuantidadeEstoque { get; private set; }
-        public Guid CategoriaId { get; private set; }
+        public Dimensoes Dimensoes { get; private set; }
         public Categoria Categoria { get; private set; }
 
-        public Produto(string nome, string descricao, bool ativo, decimal valor, DateTime dataCadastro, string imagem, Guid categoriaId)
+        protected Produto() { }
+        public Produto(string nome, string descricao, bool ativo, decimal valor, Guid categoriaId, DateTime dataCadastro, string imagem, Dimensoes dimensoes)
         {
+            CategoriaId = categoriaId;
             Nome = nome;
             Descricao = descricao;
             Ativo = ativo;
             Valor = valor;
             DataCadastro = dataCadastro;
             Imagem = imagem;
-            CategoriaId = categoriaId;
+            Dimensoes = dimensoes;
 
             Validar();
         }
 
         public void Ativar() => Ativo = true;
+
         public void Desativar() => Ativo = false;
 
         public void AlterarCategoria(Categoria categoria)
@@ -38,18 +42,14 @@ namespace NerdStore.Cadastro.Domain
 
         public void AlterarDescricao(string descricao)
         {
-            Validacoes.ValidarSeNuloOuVazio(descricao, "O campo Descrição não pode estar vazio");
+            Validacoes.ValidarSeNuloOuVazio(descricao, "O campo Descricao do produto não pode estar vazio");
             Descricao = descricao;
         }
 
         public void DebitarEstoque(int quantidade)
         {
-            Validacoes.ValidarSeNuloOuVazio(Nome, "O campo Nome da categoria não pode estar vazio");
-
-            if (PossuiEstoque(quantidade))
-                throw new DomainException("Estoque insuf");
-
             if (quantidade < 0) quantidade *= -1;
+            if (!PossuiEstoque(quantidade)) throw new DomainException("Estoque insuficiente");
             QuantidadeEstoque -= quantidade;
         }
 
@@ -67,7 +67,7 @@ namespace NerdStore.Cadastro.Domain
         {
             Validacoes.ValidarSeNuloOuVazio(Nome, "O campo Nome do produto não pode estar vazio");
             Validacoes.ValidarSeNuloOuVazio(Descricao, "O campo Descricao do produto não pode estar vazio");
-            Validacoes.ValidarSeIgual(CategoriaId, Guid.Empty, "O campo CategoriaId do produto não pode estar vazio");
+            Validacoes.ValidarSeDiferente(CategoriaId, Guid.Empty, "O campo CategoriaId do produto não pode estar vazio");
             Validacoes.ValidarSeMenorQue(Valor, 1, "O campo Valor do produto não pode se menor igual a 0");
             Validacoes.ValidarSeNuloOuVazio(Imagem, "O campo Imagem do produto não pode estar vazio");
         }
